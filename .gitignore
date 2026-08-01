@@ -1,0 +1,20 @@
+# 密钥与本地配置
+.env
+.env.*
+*.key
+*.pem
+
+# 日志与用量记录
+*.log
+*.csv
+logs/
+
+# 临时文件
+*.tmp
+Thumbs.db
+.DS_Store
+
+# 本地 IDE / 系统
+.idea/
+.vscode/
+.codex/

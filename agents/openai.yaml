@@ -1,0 +1,7 @@
+interface:
+  display_name: "豆包识图"
+  short_description: "在 Codex 内用豆包 Doubao-Seed-2.0-mini 识别图片、照片与截图并返回文字分析"
+  default_prompt: "Use $doubao-vision to recognize the image I uploaded."
+
+policy:
+  allow_implicit_invocation: true
