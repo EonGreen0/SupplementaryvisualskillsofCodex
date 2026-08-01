@@ -155,4 +155,4 @@ Doubao-Seed-2.0-mini 按量计费（≤32K 输入区间）：
 
 ## 许可证
 
-[MIT](LICENSE)
+[Unlicense](LICENSE)（公有领域授权，沿用仓库创建时的选择）
