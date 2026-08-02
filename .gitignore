@@ -18,7 +18,3 @@ Thumbs.db
 .idea/
 .vscode/
 .codex/
-
-# 本地技能目录中未纳入本仓库的内容
-.system/
-hatch-pet/

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Doubao 语音朗读"
-  short_description: "用豆包语音合成 2.0 将文字合成为语音并朗读出来"
-  default_prompt: "Use $doubao-voice to synthesize the reply into speech with Doubao TTS 2.0 and play it aloud."

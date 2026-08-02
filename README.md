@@ -1,17 +1,8 @@
-# Doubao Skills for Codex — 豆包的眼睛 + 嘴巴
+# Doubao Vision — 给 Codex 装上豆包的眼睛
 
 一个开箱即用的 Codex 技能（Skill）：给**纯文本模型**（如 DeepSeek）补上视觉能力。用户上传图片、本地图片、屏幕截图，都由火山方舟的 **Doubao-Seed-2.0-mini** 完成识别，并把文字/JSON 结果返回给主模型。
 
 不需要多模态大模型，不需要本地显卡推理，**按量付费、成本极低**（每百万 token 输入 0.2 元 / 输出 2 元）。
-
-本仓库是 Codex 技能合集，当前包含两个技能：
-
-| 技能 | 目录 | 能力 |
-|---|---|---|
-| doubao-vision | `doubao-vision/` | 图片/截图识别，返回文字或 JSON（Doubao-Seed-2.0-mini） |
-| doubao-voice | `doubao-voice/` | 文字合成语音并朗读/播放（豆包语音合成 2.0） |
-
-> 视觉技能文档见 [doubao-vision/SKILL.md](doubao-vision/SKILL.md)，声音技能文档见 [doubao-voice/SKILL.md](doubao-voice/SKILL.md)。
 
 ## 功能特性
 
@@ -32,33 +23,13 @@ doubao-vision/
 ├── SKILL.md                  # 技能说明（Codex 读取）
 ├── agents/openai.yaml        # 技能界面元数据
 ├── scripts/
-│   └── doubao-vision.ps1     # 视觉核心脚本
-└── references/
-    └── prompts.md            # 提示词模板
-doubao-voice/
-├── SKILL.md                  # 声音技能说明（Codex 读取）
-├── agents/openai.yaml        # 技能界面元数据
-├── scripts/
-│   └── doubao-tts.ps1        # 语音合成核心脚本
-└── references/
-    └── speakers.md           # 内置音色列表
-README.md
-LICENSE
-.gitignore
+│   └── doubao-vision.ps1     # 核心脚本（唯一需要运行的文件）
+├── references/
+│   └── prompts.md            # 提示词模板
+├── README.md
+├── LICENSE
+└── .gitignore
 ```
-
-## Doubao Voice 声音技能
-
-用豆包语音合成 2.0（seed-tts-2.0）把文字变成语音，支持朗读、播放、保存 wav，无需 ffmpeg。
-
-- 环境变量：`DOUBAO_API_KEY`（必填，豆包语音控制台 APIKey）、`DOUBAO_APP_ID`（旧版鉴权可选）
-- 快速使用：
-
-```powershell
-pwsh -File doubao-voice/scripts/doubao-tts.ps1 -Text "你好，这是豆包的声音。" -Play
-```
-
-- 完整说明见 [doubao-voice/SKILL.md](doubao-voice/SKILL.md)。
 
 ## 快速开始
 
@@ -77,9 +48,8 @@ pwsh -File doubao-voice/scripts/doubao-tts.ps1 -Text "你好，这是豆包的�
 
 ```powershell
 # 克隆或下载本项目后，把内容复制到 Codex 技能目录
-git clone https://github.com/EonGreen0/SupplementaryvisualskillsofCodex.git
+git clone https://github.com/<你的用户名>/doubao-vision.git
 Copy-Item doubao-vision\* "$env:USERPROFILE\.codex\skills\doubao-vision\" -Recurse
-Copy-Item doubao-voice\* "$env:USERPROFILE\.codex\skills\doubao-voice\" -Recurse
 ```
 
 然后**完全退出并重启 Codex**（让新会话加载技能）。
@@ -106,7 +76,7 @@ source ~/.zshrc
 新开一个 Codex 聊天窗口，直接上传一张图片，或手动运行：
 
 ```powershell
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Question "这张图里有什么？"
+pwsh -File scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Question "这张图里有什么？"
 ```
 
 看到类似输出即成功：
@@ -120,22 +90,22 @@ pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Que
 
 ```powershell
 # 查找用户最近上传的图片（30 分钟内）
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -FindRecent -RecentMinutes 30
+pwsh -File scripts/doubao-vision.ps1 -FindRecent -RecentMinutes 30
 
 # 分析本地图片
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Question "识别这张图并描述内容"
+pwsh -File scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Question "识别这张图并描述内容"
 
 # 截取当前屏幕
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Screenshot -Question "当前界面显示什么？"
+pwsh -File scripts/doubao-vision.ps1 -Screenshot -Question "当前界面显示什么？"
 
 # JSON 结构化输出（建议在问题中明确要求返回 JSON）
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Question "用 JSON 描述这张图" -Json
+pwsh -File scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -Question "用 JSON 描述这张图" -Json
 
 # 多图对比
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Images C:\path\before.jpg,C:\path\after.jpg -Question "对比这两张图"
+pwsh -File scripts/doubao-vision.ps1 -Images C:\path\before.jpg,C:\path\after.jpg -Question "对比这两张图"
 
 # 裁剪放大局部（模型视图坐标，自动换算回原图）
-pwsh -File doubao-vision/scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -CropView 600,300,1200,1200 -Detail xhigh -Question "检查星点锐度"
+pwsh -File scripts/doubao-vision.ps1 -Image C:\path\photo.jpg -CropView 600,300,1200,1200 -Detail xhigh -Question "检查星点锐度"
 ```
 
 ## 参数说明
