@@ -153,6 +153,10 @@ Doubao-Seed-2.0-mini 按量计费（≤32K 输入区间）：
 - `.gitignore` 已排除 `.env`、日志、临时文件；
 - 用量日志默认写在 `~/.codex/logs/`，不会进入仓库。
 
+## 更新记录
+
+- 2026-08-02：修复 Windows PowerShell 5.1 下中文请求体乱码（请求体改为 UTF-8 字节发送，中文提示词不再被误判为“乱码”）；脚本保存为带 BOM 的 UTF-8，PowerShell 5.1 与 7 均可直接运行；调用方式建议优先 `pwsh -File`；移除仓库内的声音技能（已迁移至独立仓库 [doubao-voice-for-Codex](https://github.com/EonGreen0/doubao-voice-for-Codex)），本仓库恢复为单一视觉技能结构。
+
 ## 许可证
 
 [Unlicense](LICENSE)（公有领域授权，沿用仓库创建时的选择）
