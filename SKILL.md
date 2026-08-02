@@ -18,7 +18,7 @@ description: >-
 
 - 火山方舟已开通模型 `doubao-seed-2-0-mini-260215`，并设置环境变量 `ARK_API_KEY`。
 - 未配置时脚本会报错，遇到 `ARK_API_KEY missing` 错误时，Codex 应直接提示用户配置环境变量并重试。
-- 跨平台与执行策略：为了保证多平台兼容与绕过 Windows 默认限制，建议 Codex 调用时统一使用 `pwsh -File` 或 `powershell -ExecutionPolicy Bypass -File`。
+- 跨平台与执行策略：脚本已保存为带 BOM 的 UTF-8，Windows PowerShell 5.1 与 PowerShell 7（pwsh）均可直接解析；调用时使用 `powershell -ExecutionPolicy Bypass -File` 或 `pwsh -File` 均可。
 - 示例中的 `scripts/doubao-vision.ps1` 是技能目录相对路径；调用时建议使用技能目录的绝对路径，或先切换到技能目录再执行。
 
 ## 使用场景（Codex 视觉）

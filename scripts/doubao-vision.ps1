@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Codex 的视觉：调用火山方舟 Doubao-Seed-2.0-mini 识别图片/截图，把文字/JSON 结果打印到 stdout。
 .DESCRIPTION
