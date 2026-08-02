@@ -189,10 +189,11 @@ function Invoke-ArkWithRetry {
         [int]$MaxRetries = 2
     )
     $attempt = 0
+    $jsonBody = $Body | ConvertTo-Json -Depth 12
     while ($attempt -le $MaxRetries) {
         try {
-            return Invoke-RestMethod -Uri 'https://ark.cn-beijing.volces.com/api/v3/chat/completions' -Method Post `
-                -Headers $Headers -ContentType 'application/json' -Body ($Body | ConvertTo-Json -Depth 12) -TimeoutSec $TimeoutSec
+                return Invoke-RestMethod -Uri 'https://ark.cn-beijing.volces.com/api/v3/chat/completions' -Method Post `
+                -Headers $Headers -ContentType 'application/json' -Body ([System.Text.Encoding]::UTF8.GetBytes($jsonBody)) -TimeoutSec $TimeoutSec
         }
         catch {
             $status = $null
